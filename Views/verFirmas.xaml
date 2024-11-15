@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Tarea2._2FirmaDigital.Views.verFirmas"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:convert="clr-namespace:Tarea2._2FirmaDigital.Utilities"
+    Title=""
+    BackgroundImageSource="backgroundfirma.png">
+    <ContentPage.Resources>
+        <convert:base64toImage x:Key="BaseArray" />
+    </ContentPage.Resources>
+    <Grid>
+        <!--  Content Grid  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--  Header  -->
+
+        <StackLayout Grid.Row="0">
+            <Frame
+                Margin="0,0,0,0"
+                Padding="5,10,5,10"
+                BackgroundColor="#cad7b2"
+                BorderColor="Black"
+                CornerRadius="20">
+                <StackLayout
+                    Margin="0,0,0,0"
+                    Padding="0,0,0,0"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalTextAlignment="Center"
+                        Text="Firmas Agregadas"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        <!--  Body: Collection View  -->
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <CollectionView
+                    x:Name="collectionViewFirmas"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    ItemsSource="{Binding Firmas}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                x:Name="frameFirma"
+                                Margin="5"
+                                Padding="5"
+                                BackgroundColor="#f4f5de"
+                           
+                                CornerRadius="10"
+                                HasShadow="True">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image
+                                        Margin="10,0,0,0"
+                                        Aspect="AspectFit"
+                                        HeightRequest="100"
+                                        HorizontalOptions="Start"
+                                        Source="{Binding FirmaDigital, Converter={StaticResource BaseArray}}"
+                                        WidthRequest="100" />
+
+                                    <StackLayout
+                                        Margin="0,0,0,0"
+                                        HeightRequest="30"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Orientation="Vertical"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Label
+                                            x:Name="labelNombreProducto"
+                                            Margin="0,0,0,10"
+                                            FontAttributes="Bold"
+                                            FontSize="14"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding NombreFirma}"
+                                            TextColor="Black" />
+                                        <Label
+                                            x:Name="labelDescripcion"
+                                            Margin="0,5,0,5"
+                                            FontAttributes="Bold"
+                                            FontSize="10"
+                                            HorizontalOptions="CenterAndExpand"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding Descripcion}"
+                                            TextColor="DarkBlue"
+                                            VerticalOptions="CenterAndExpand"
+                                            VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
